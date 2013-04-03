@@ -1,0 +1,30 @@
+nPose Dismount Plugin .029.001:               
+
+This is a way to control how the AV dismounts nPose.
+
+Dependencies:
+This plugin requres the use of the nPose (V) version of scripts.
+
+Bug Fix:
+1.  Modified to receive seat update from the Ash core version.
+2.  Ensure that no attempt will be made to unsit an Avatar that is not seated.
+
+
+To use:
+Build a SET notecard and add the Animation or Pose of your choosing.  
+Set position and rotation to your liking.
+Add a link message line as the last line of the notecard. (LINKMSG|-221|1~2~3~4) Where the ~'d list of numbers are the seat numbers where the AV is you intend to have stand.  In this case, 4 seated AV's will stand in their own spot at the same time.
+
+For this demo I have used a pose which was donated to nPose by RohanaRaven Zerbino of  [RNP] Animations & Sculpts
+
+􀀔
+􀀓
+
+To try the demo, simply add all 3 of the items provided to your nPose (V) version build.  A button with "Dismount" will appear in the top menu.
+
+Version history:
+v .002:
+1.  Fixed bug where seated AV's were not always unseated on dismount.
+
+v .001:
+This is the initial release.

@@ -1,0 +1,6 @@
+PROP|chainPointProp|<1.23340, 0.00000, 0.99951>|<0.00000, 0.00000, 0.00000>
+ANIM|nadu|<-0.29998, -0.00002, 0.79959>|<0.00145, -5.62020, 0.00000>|
+SATMSG|7200|leftloop~lcuff~rightloop~rcuff
+SATMSG|-1812221819|RlVcommand,@unsit=n/@sittp=n/@tploc=n/@tplure=n/@tplm=n/@sendim=n/@recvim=n/@acceptpermission=add|%AVKEY%
+NOTSATMSG|7201|leftloop~rightloop
+NOTSATMSG|-1812221819|release

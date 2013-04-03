@@ -1,0 +1,17 @@
+In World Listener Script:               
+
+This script is intended for in world builds not associated in any way with nPose (they are not a prop rezzed by nPose).  It will listen for color/texture commands on the channel arbNum for color/texture change link messages.
+
+Dependencies:                               􀀓
+Requires the attitional script nPose Color/Texture rev. .028.06 both in the base nPose build and the in world build.
+
+Use:
+Add the above listener and nPose Color/Texture rev. .028.06 or later version to items you desire to control textures and/or colors on that are not nPose props.
+
+Example notecards:
+􀀒
+􀀔
+
+Version History:
+ver. 0.002:
+initial release

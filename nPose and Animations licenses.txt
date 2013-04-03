@@ -1,0 +1,51 @@
+nPose v0.028.RC License/Authorization for use:
+-------------------------------------------
+
+The nPose scripts are licensed under the GPLv2 (http://www.gnu.org/licenses/gpl-2.0.txt), with the following addendum:
+
+The nPose scripts are free to be copied, modified, and redistributed, subject to the following conditions:
+    - If you distribute the nPose scripts, you must leave them full perms.
+    - If you modify the nPose scripts and distribute the modifications, you must also make your modifications full perms.
+
+"Full perms" means having the modify, copy, and transfer permissions enabled in Second Life and/or other virtual world platforms derived from Second Life (such as OpenSim).  If the platform should allow more fine-grained permissions, then "full perms" will mean the most permissive possible set of permissions allowed by the platform.
+
+Scripts which communicate with the nPose scripts only through link messages are not subject to the above restrictions.
+=====================================
+Animations: Licenses/Pemissions for use/distribution:
+
+All animations included with the nPose v0.028.RC animation engine have been donated to the system by their various creators and are released to the general public under the same terms as the scripts (please see above). Where necessary, permission from the creators is included here:
+
+CREATOR: Nandana Singh (original author of nPose)
+􀀔
+􀀓
+􀀒
+􀀐
+􀀑
+ 
+CREATOR: Ulrika Zugzwang (from her profile: " I'm known for creating the first and largest free animation and pose packs in SL.")
+􀀁
+ 
+CREATOR: Darien Caldwell/Lexbot Sinister (released to the general public 2009)
+ = nadu (original name: 􀀂 by Darien Caldwell (aka Lexbot Sinister)
+ 
+ CREATOR: Jeaniesing Trilling (graciously donated to nPose) 􀀍 )
+􀀆
+􀀃
+􀀄
+􀀅
+ 􀀇
+ 􀀈
+ 􀀉
+ 􀀊
+ 􀀋
+ 􀀌
+
+ CREATOR: Howard Baxton (scriptor for nPose)
+ 􀀀
+ 
+ CREATOR: RohanaRaven Zerbino
+ 􀀏
+ 
+ =========================================
+ Support Authorized/Legal use of animations: get educated .. 
+ 􀀎

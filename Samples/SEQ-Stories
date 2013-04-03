@@ -1,0 +1,8 @@
+30|SET:SEQ:Stories1
+30|SET:SEQ:Stories2
+30|SET:SEQ:Stories3
+30|SET:SEQ:Stories4
+LOOPTO
+30|SET:SEQ:Stories3
+30|SET:SEQ:Stories2
+LOOP

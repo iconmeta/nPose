@@ -1,0 +1,9 @@
+nPose explicit prop die 0.028:                  
+
+This new version supports a different type of prop as an option by replacing the original prop script with the explicit die prop script.
+For props that you would like to explicitly control and leave rezzed until commanded to die with a notecard line such as (PROP|propname|propname=die).
+As always any and all props will die if the parent nPose build is no longer rezzed in world.
+
+Any nPose build can contain both types of prop.                 􀀔
+
+This is the initial release for the explicit prop die optional script.

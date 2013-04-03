@@ -1,0 +1,5 @@
+nPose PropTouch Menu Relay  0.028:                  
+
+Add this script to any prop where you would like to pull the main nPose menu by touching the prop.  In this case where I have a blanket prop that covers much of my bed, I can get the nPose menu by clicking the blanket.  Very useful in some situations.
+
+This is the initial release.

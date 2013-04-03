@@ -1,0 +1,23 @@
+nPose RLV 0.028.010:                
+
+Bug Fixes:
+    1.  Moved most of the functionality out of the menu script and into the RLV plugin where it belongs. Requires the use of nPose menu .029.006.
+    2.  Ensure that no attempt can be made to unsit an Avatar that is not seated.
+    
+Original description notes:
+I put this together thinking that the notecard system would be used to impose/remove restrictions but the notecard system can be used to relay any RLV commands out.  The only thing the ManageRLV menu does that is unique is to add victims to the npose victim list when captured.  Multiple victims can be captured but only one victim will be selected at a time to impose/remove restrictions.
+
+Being a victim does not mean there are restrictions applied.  The restrictions must be done with the nPose notecard system.  Set a pose up with restrictions in the SATMSG line, select the pose and then capture your victim. The restrictions within that notecard will be applied to your victim when they sit.
+
+SATMSG overrides a button notecard.  I.e... if a pose is selected with SATMSG restrictions, a BTN release will not lift the restrictions imposed by the SATMSG.  The victim must be in a pose that has not SATMSG restrictions to have them removed by BTN notecard.  Once restrictions are imposed, they stay imposed even if the victim is moved to a pose set without SATMSG restrictions.  Restrictions must be removed by another set of RLV commands.
+
+In all cases, all restrictions will be removed when a victim stands.  This is by design.  They are also removed from the victim list when they stand.
+
+Version History:
+0.028.005
+    1.  Added function to let the menu script know when this RLV plugin is active and in contents with the other nPose scripts.
+
+nPose RLV 0.028.007:  
+    1.  Forced sit would fail because the script was not picking up the new object uuid when rezzed.  Victim would be trying to sit the wrong object in this instance.
+    2.  Modified to support the memory stats reporting.
+    3.  Various bug fixes.

@@ -1,0 +1,7 @@
+PROP|chainPointProp|<1.23340, 0.00000, 0.99951>|<0.00000, 0.00000, 0.00000>
+ANIM|nadu|<-0.29998, 0.49998, 0.79960>|<0.00145, -5.62020, 0.00000>|
+SATMSG|7200|leftloop~collar
+NOTSATMSG|7201|leftloop
+ANIM|nadu|<-0.29998, -0.50002, 0.79957>|<0.00145, -5.62020, 0.00000>|
+SATMSG|7200|rightloop~collar
+NOTSATMSG|7201|rightloop

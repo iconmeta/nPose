@@ -1,0 +1,163 @@
+nPose Birch .007 (Beta4)                  
+
+Bug fixes:
+1. Menus are now sorted alphabetically in two separate sorts.  Notecard defined menu buttons are sorted and placed on the upper portion of the dialog.  Utility buttons are sorted and placed at the bottom of the dialog.
+2.  White space at the beginning and end of each notecard line are now ignored.
+3.  All scripts have less impact on script memory usage and sim load.  This means nPose is capable of seating in excess of 25 individuals using only the nPose scripts in the object above.
+4.  Multi-User Menu system is now fully functional.  This means that two or more individuals can use the menu system at all levels without interfering with any other individual.
+5.  Support for non-numbered seats as well as numbered seats.
+6.  Fixed a bug so it is not possible to attempt unsitting an Avatar that is not seated.
+
+New Features:
+1.  Click any adjuster to get a data dump with its' position and rotation.
+
+CHANGELOG
+Ash:
+1.  Built in support for layered animations.  Talk directly with the slave via LINKMSG to layer on additional animation to the existing nPose animation set.  Decommissioned layered animation plugin.
+2.  A single slave script now supports virtually unlimited seated AV's.  Use of this new slave is optional as support for the legacy slaves still remains functional.
+3.  The core is now leaner on memory usage and supports virtually unlimited seated AV's.
+4.  Updated core and menu to support more than 10 sitters.
+5.  Emulation of SchmoPose where each sitter can choose their sit pose without effecting any other seated AV's with the use of layered animations.  Animations should be made with the same reference points as layering doesn't change the base nPose positions.
+
+V0.028.015(V)
+1.  %AVKEY% was replacing the AVKEY at the time the notecards were read rather than when needed.  This left DEFAULT notecards un-effective for passing the toucher KEY into SATMSG items.  Changed when nPose replaces %AVKEY% with the toucher's key.
+2.  The menu would dumbly put RLV options in the Admin menu even if the RLV plugin was not present in the build.  Changed the menu and RLV scripts to be aware and only add RLV options to the menu when the RLV plugin is present.
+3.  Replaced many of the llSay functions with llRegionSayTo functions for far less channel spaming.  Only the intended object/AV receives the messages.
+4.  Changed llSetLinkPrimitiveParams to llSetLinkPrimitiveParamsFast.  This is intended to make quicker, smoother pose changes.
+5.  Fixed bug where nPose would loose track of seated AV's when the number of seats changed due to changing the pose.
+
+
+V0.028.10(V)
+    Choose which seat to sit before you sit (much like selecting which poseball someone would use.
+    Change seats is now available rather than swap.  Sitter can now change seats with seat4 directly rather than swapping 4 times to get there and moving all AV's to do it.
+
+v0.028
+    Optional Timed Prop die.
+    Support for xcite via relay messaging.
+    Built in Menu-On-Sit as an option.
+    Built in Return to Default Pose when last AV has stood as an option.
+    Permissions to control who can pull a menu where options are Public, Locked, Group.
+    Sit Target property setting is now built into the on_rez function of the core.
+    RLV application to grab and manage multiple victims.
+    Built in support for sequences of pose sets with LOOPTO capability (one position adjustment applies to all sequence elements).
+    
+v0.027
+    Menu Control now has a hook that will let you trigger a menu via link message.
+    nPose will now accept "BTN:" cards with LINKMSG lines inside.  Inside each line, the token "%AVKEY%" will be replaced with the menu user's key before the link message is sent.
+
+v0.026
+    Put the sit target workaround script into the demo object prims and updated the version number on the demo to agree with the notecard.
+
+v0.025
+    changed the sit target workaround script to not self-delete.  This fixes the problem of disappearing sit targets .
+
+v0.024
+    fixed a menu pagination bug for categories with 9-12 entries.
+
+v0.023
+    fixed two bugs in the Dialog script's handling of multi page menus.
+
+v0.022
+    added checking to dialog script to prevent seated one av from having multiple slots in the menus strided list
+
+v0.021
+    did some behind the scenes improvements on the dialog script, esp. to make it better support buttons that you want to have on every page (eg sync and swap)
+    now allow for poses to be in the root menu, so you don't need to do subcategories if you don't want to.  To put a poseset in the main menu, just name its card in the format SET:setname.
+    menus may now be nested!
+    Added unsit feature to admin menu
+
+v0.020
+    reduced sequence timer to 29 seconds to make transitions smoother (accounts for time dilation and some anim load time)
+    improved sync feature to actually, ya know, work.    
+
+v0.019
+    avatars are again unseated if there are more seated avatars than anim slots in the set
+    changed category menus to put labels right on the buttons instead of in a numbered list
+    swaps are now remembered between pose switches
+    small change to prop script to stop it getting confused if you take a rezzed prop into inventory and then place that inside the npose object
+    increased the llSleep during a "sync" from 0.2 to 0.3
+    added an llSleep of 0.2 after starting one anim in a sequence and stopping the previous anim.
+    Instead of timing out, dialogs for seated avatars now remain active until the person stands.
+
+v0.018
+    added "sync" feature which restarts all anims and sequences
+    added SATMSG and NOTSATMSG handling to the core and config cards, to enable more robust integration with other plugins
+    created lockmeister-compatible chain point plugins that may be driven by SATMSG and NOTSATMSG config lines.  See the Misc:Nadu cards for examples.
+
+v0.017
+    allowed for a RESTART keyword in multi anim sequences to change looping behavior.  When the slave gets to the RESTART, it will go back to the first anim in the sequence.
+    removed the control key stuff from slave scripts and moved into the key-based alternative controller to reduce link message spam
+
+v0.016
+    made props aware of the base (using ping/pong exchange) so they can llDie if the base goes away.  Props will check for the base's existence, and for pos/rot changes, once every 10 seconds.
+    fixed 2 typos in the PosDump routine
+
+v0.015
+    the main menu now shows labels directly on the buttons instead of in a numbered list
+    added an Admin menu with Adjust, StopAdjust, and PosDump functions (replacing the former /9adjust chat command).
+    PosDump dumps all current ANIM and PROP lines to chat
+    modified the nPose Prop script to support the PosDump feature
+    Adjusters are now re-rezzed when switching poses, until StopAdjust is clicked
+    fixed an error rezzing props when base is rotated
+
+v0.014
+    poses are reset on region crossing to work around SL behavior that set avs at sit targets on changing region
+    adjusters now move with avatars if you swap while adjusting
+    adjusters now rez at proper angles if base is at non-zero rotation
+    chat message ANIM lines from base while adjusting now include face anim section
+    adjusters are now 80% transparent and non-glowy, to reduce their tendency to obscure the avatars themselves
+
+v0.013
+    fixed another stupid menu bug introduced by the new DEFAULT feature
+    slave scripts now take controls and send link messages on control events
+    alternative "key press" control method added
+
+v0.012
+    fixed a stupid bug that prevented the DEFAULT set from showing in the menu.
+
+v0.011
+    added checks to prevent errors when stopping anims for non-present avs
+    slaves now reset when their av stands
+    moved /9adjust listener out of core and into menu control
+    added ability to have a DEFAULT:<category>:<setname> card.  Core will use this set on startup if found.  If not, it will use the first SET card.  The DEFAULT card will show up in the menu just like a set card, by its category.
+    extra avatars are now unsat if we have more avs than anim slots.
+
+v0.010
+    adds a sit target workaround for cases when you're seeing "no room to sit" errors.
+
+v0.009
+    fixed a bug in rezzing adjusters that prevented them from starting at the pose position and rotation when rezzed.
+
+v0.008
+    Re-architected the core to delegate animating and positioning for each slot to a separate slave script.  You may have as many slots as you like, but you need a slave script for each.
+    added support for face anims.  Put a tilde ("~") delimited list of face anims at the end of each ANIM line.  See the Foursome meditation card for an example.
+    added support for anim sequences (like Lovescene).  Each stage must be 30 seconds long.  The last stage will loop indefinitely.  Define a sequence by putting a tilde-delimited list of anims where you'd normally just put an anim name
+    adjustment is now triggered (by owner only) by saying /9adjust
+    added instructions!
+
+v0.007
+    revamped the menus to fix various bugs and increase consistency
+    added extra demo of auto-switching control script.
+
+v0.006
+    added PROP rezzing feature.  See Chair Sit card.
+    added category organization to control script
+    added feature to send link messages from config card (see Meditate:Single), and a sample link message receiver script.
+    set card prefix is now "SET" instead of "POSESET".
+
+v0.005
+    made the adjustment handles longer and less transparent so they're easier to see and grab.
+    added Swap feature
+
+v0.004
+    added adjustment handles
+    created MLP config conversion tool
+
+v0.003
+    Added license notecard, and removed debug strings in v0.002.
+
+v0.002
+    Fixed several bugs occuring on switching anims, an av standing, or a new av sitting.
+
+v0.001
+    Initial release

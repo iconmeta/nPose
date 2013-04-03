@@ -1,0 +1,18 @@
+nPose Chain Point:              
+This plugin calls LockMeister/LockGuard compatible cuffs as a chainpoint.  Add this script to each chain point in the nPose build or in any prop.  The prop does not have to be rezzed by nPose, it can be any object within whisper distance to the nPose build.
+
+The chain point script looks at it's description field for the designator for the chain point.  The description field will have to match what the notecard is setup to use for this specific chain point.
+
+The prim this script resides in provides the particle chain which attaches to the end point designated in the notecard.
+
+When the nPose Chain Point script is asked to provide the chain to the designated end point, it sends out a message to the LockMeister/LockGuard device and waits to hear back.  If the end point exists, it sends the OK and the chain point script sends the particle chain.
+
+In the sample notecard for Nadu X 1:
+ANIM|nadu|<-0.29998, -0.00002, 0.79959>|<0.00145, -5.62020, 0.00000>|
+SATMSG|7200|leftloop~lcuff~rightloop~rcuff
+NOTSATMSG|7201|leftloop~rightloop
+
+When someone sits, nPose sends out the SATMSG "leftloop~lcuff~rightloop~rcuff" on channel 7200.  The nPose Chain Point script is listening on that channel for instructions.  Two chain points will receive the message, the chain points that have "leftloop" and "rightloop" in their respective description field.  The leftloop chain point will send out a message looking for LockMeister/LockGuard compatable "lcuff" (end point) and deploy the chain to lcuff if it receives an answer from lcuff.  The rightloop will do the same but looking for "rcuff".
+
+When this person is no longer in this seat, nPose sends out a request on channel 7201 to unchain.  Both chain points will hear the message and stop the chains.
+

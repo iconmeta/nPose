@@ -1,0 +1,7 @@
+ANIM|sit crossed|<0.998169, -0.000038, 0.854574>|<2.111691, 9.832552, 167.813278>|
+ANIM|sit crossed|<-1.118729, -0.000038, 0.854574>|<-0.001363, -10.054587, -0.002421>|
+PROP|Basic Chair|<-1.18593, 0.02743, 1.00155>|<0.00000, -11.00044, 0.00000>|
+PROP|Basic Chair|<1.07037, 0.03049, 1.00138>|<0.00000, 11.00044, 180.00000>|
+PROP|nPose Table|<-0.01363, 0.01654, 1.00851>|<0.00000, 0.00000, 90.00000>|
+PROP|nPose Fruit Plate (LL)|<0.09108, 0.03049, 1.18046>|<0.00000, -2.99920, 180.00000>|
+LINKMSG|5000|Psst... Notice the plate of fruit on the table? It derezzes after 20 seconds because it's been eaten. Check the fruit plate prop object description for lifetime usage.|somekey

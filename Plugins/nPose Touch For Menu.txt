@@ -1,0 +1,5 @@
+nPose touch for menu ver. .001:                 
+
+In situations where the nPose engine does not reside in the root prim, touching the linked prim where the engine does reside is the only way to pull the main nPose menu.  Add this script to the root menu to pull the main nPose menu by touching any linked prim.
+
+This is the initial release.

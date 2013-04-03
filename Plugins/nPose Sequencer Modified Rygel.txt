@@ -1,0 +1,20 @@
+nPose Sequencer Modified Rygel .029         
+
+Bug Fix:
+    1.  Modified to work with Ash.
+    2.  Added support for memory usage stats reporting.
+
+The Rygel sequencer has now been built into nPose.  This allows for full functionality of each pose set so each pose in the sequence can have it's own positioning, SATMSG, Facial expressions, etc.
+    a. Build a SET: notecard for each pose set in the sequence.
+        􀀔
+        􀀓
+        􀀒
+        􀀑
+    b.  Build a menu sequence notecard to pull the Rygel menu.
+        􀀐
+    c.  Start and stop the sequence from the Rygel menu.
+    􀀎
+    
+    
+ 
+ 􀀏

@@ -1,0 +1,20 @@
+nPose Color/Texture rev. 0.05:                  
+        
+New Features:
+This plugin now will relay out on it's arbNum as a chat channel to any in world prims not associated with nPose.  To use this feature add this script to the nPose base and to the in world prim to receive the color/texture changes.  Also add "In World Listener Script" to the in world prim within the linked build.
+
+   
+The nPose prop texturing script is to be placed in any link set that will be retextured by the nPose menu (selected by the builder).  Props can also be colored using this same plugin.  Pick a word that describes the prop/child prims to be retextured and include that word in the notecard.  Retexturing will only be applied to prop prims that contain this description and included in the notecard.  The menu is driven by the normal BTN notecards similarly used to setup poses.  Either the uuid for a texture can be used or the name of a texture placed within the prim of the prop as the script.
+ 
+Use BTN notecard to set color and texture of prims and/or props from menu. The plugin looks for prims with matching name in the Description Field.
+After a texture or color has been set, the script will remember what has been used.  If props are rezzed later and has the matching name in their description, they will automatically change to the saved color and texture.  In a case where my over-stuffed chair rezzes an ottoman for some pose sets, the ottoman will automatically re-texture to match what I have set for my chair.
+        
+Example that sets the color (red) and texture (blank) of all prims with ~base in their description:
+        LINKMSG|-22452987|<0.77255, 0.00000, 0.00000>~-1~base|72a7b646-2c43-2a6a-46c3-6250a8b30312
+        
+Example that sets the color (white) and the texture (Old Leather) to all prims with ~upolstery in their description:
+        LINKMSG|-22452987|<1.00000, 1.00000, 1.00000>~-1~upolstery|ef45698a-b697-8da7-c3ec-43ad9f93334d
+
+Version History:
+rev. 0.05
+initial release

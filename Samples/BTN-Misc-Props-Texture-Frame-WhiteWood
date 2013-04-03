@@ -1,0 +1,9 @@
+LINKMSG|-22452987|<1.00000, 1.00000, 1.00000>~-1~frame|b373702a-8443-7563-536b-61242c21694c
+
+#LINKMSG tells the main script to talk to another script within this build or rezzed by nPose
+#'|' is the field separator
+#~22452987 is the arbatrary number the receiving script will check and listen on
+#b373702a-8443-7563-536b-61242c21694c is the uuid of the texture in contents of the prim containing npose scripts
+#~ is the separator for multiple items in this field
+#-1 designates which side of the prim for texturing.  -1 designates all sides
+#frame designates which child prim will be retextured. all child prims to be retextured should have this in the description.. exactly this at current scripting
