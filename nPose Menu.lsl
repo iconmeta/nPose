@@ -502,14 +502,23 @@ Pick an option.", ["on", "off"]);
                     DoMenu(toucherid, path, page);
                 }//normal housekeeping stuff
                 list pathlist = llDeleteSubList(llParseStringKeepNulls(path, [":"], []), 0, 0);
+                integer permission = llListFindList(menuPerm, [selection]);
                 string defaultname = llDumpList2String([defaultprefix] + pathlist + [selection], ":");                
                 string setname = llDumpList2String([setprefix] + pathlist + [selection], ":");
+                string btnname = llDumpList2String([btnprefix] + pathlist + [selection], ":");
+                //correct the notecard name so the core can find this notecard
+                if (permission != -1){
+                    if (llList2String(menuPerm, permission+1) != "public"){
+                        defaultname += "{"+llList2String(menuPerm, permission+1)+"}";
+                        setname += "{"+llList2String(menuPerm, permission+1)+"}";
+                        btnname += "{"+llList2String(menuPerm, permission+1)+"}";
+                    }
+                }
                 if (llGetInventoryType(defaultname) == INVENTORY_NOTECARD){
                     llMessageLinked(LINK_SET, DOPOSE, defaultname, toucherid);                    
                 }else if (llGetInventoryType(setname) == INVENTORY_NOTECARD){
                     llMessageLinked(LINK_SET, DOPOSE, setname, toucherid);
                 }                             
-                string btnname = llDumpList2String([btnprefix] + pathlist + [selection], ":");
                 if (llGetInventoryType(btnname) == INVENTORY_NOTECARD){
                     llMessageLinked(LINK_SET, DOBUTTON, btnname, toucherid);
                 }
