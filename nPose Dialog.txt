@@ -1,0 +1,5 @@
+nPose Dialog:               
+
+The nPose Dialog is a utility script for creating, displaying and returning clicks of the menu.
+
+The Dialog script has not changed in a very long time.  We will call this the original release.

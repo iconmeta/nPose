@@ -1,0 +1,23 @@
+nPose Slave 0.030.002:                  
+
+Bug Fixes:
+ 1. An unsuccessful test to check if AV was seated before animation layered animations.  The Slave will no longer attempt to impose a layered animation on a non-seated AV.
+ 
+    
+Version History:
+nPose Slave 0.030.001:  
+New Features:
+ 1. Handles facial animation times.  This is optional and continuous as the older way still works making it nice to mix the two features.  Use tilde delimited list with a time to run each in seconds as follows:
+    express_shrug_emote=10~express_laugh_emote=3
+
+nPose Slave 0.030:
+    Same as 0.029.005.
+
+nPose Slave 0.029.005:
+  1. One Slave script is all that will be required to support virtually unlimited number of seated AV's.
+  2. Layered animation support is now built into the slave script.
+  3. Handling of offsets has been moved to this slave because it is lean enough on memory usage to handle the storage.
+  4. The Slave script now handles building and sending seat# to the menu script. 
+
+nPose Slave 0.028.001
+    1.  Changed llSetLinkPrimitiveParams to llSetLinkPrimitiveParamsFast.  This is intended to make quicker, smoother pose changes.

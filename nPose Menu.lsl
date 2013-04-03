@@ -18,6 +18,7 @@ string RLVenabled = "off";   //default RLV enabled state
 integer optionsNum = -240;
 integer curseatednumber = 0; //number of currently seated AVs.  used in change function to help sort options
 list menus; //strided list in form [colon-delimited menupath,pipe-delimited items in that menu]
+list menuPerm = [];
 string setprefix = "SET";
 string btnprefix = "BTN";
 string defaultprefix = "DEFAULT";
@@ -109,6 +110,28 @@ list slotbuttons = [];//list of seat# or seated AV name for change seats menu.
 list avs = [];//list of seated AV keys.
 
 key Dialog(key rcpt, string prompt, list choices, list utilitybuttons, integer page){
+    if (toucherid != llGetOwner()){
+        integer stopc = llGetListLength(choices);
+        integer nc;
+        for (nc = 0; nc < stopc; ++nc){
+            integer indexc = llListFindList(menuPerm, [llList2String(choices, nc)]);
+            if (indexc != -1){
+                if (llList2String(menuPerm, indexc+1) == "owner"){
+                    choices = llDeleteSubList(choices, nc, nc);
+                    nc--;
+                    stopc--;
+                }else if (llList2String(menuPerm, indexc+1) != "public"){
+                    if (llList2String(menuPerm, indexc+1) == "group"){
+                        if (llSameGroup(toucherid)!=1){
+                            choices = llDeleteSubList(choices, nc, nc);
+                            nc--;
+                            stopc--;
+                        }
+                    }
+                }
+            }
+        }
+    }
     key id = llHTTPRequest("http://google.com", [HTTP_METHOD, "GET"], "");
     llMessageLinked(LINK_SET, DIALOG, (string)rcpt + "|" + prompt + "|" + (string)page + "|" + llDumpList2String(choices, "`") + 
         "|" + llDumpList2String(utilitybuttons, "`"), id);
@@ -200,7 +223,7 @@ DoMenu(key toucher, string path, integer page){//builds the final menu for autho
         if ((path == ROOTMENU) && (RLVenabled == "on")){
             utility = ManageRLV + utility; //add the managerlv button if enabled on rootmenu only
         }
-        key id = Dialog(toucher, "Pick your pose.", buttons, utility, page);    
+        key id = Dialog(toucher, "Pick your pose.\n"+llList2String(dialogids, llListFindList(dialogids, [toucher])+1)+"\n", buttons, utility, page);    
         list addme = [id, toucher, path];
         index = llListFindList(dialogids, [toucher]);
         if (index == -1){
@@ -246,11 +269,22 @@ DoMenu_AccessCtrl(key toucher, string path, integer page){//checks and enforces 
 
 BuildMenus(){//builds the user defined menu buttons
     menus = [];
+    menuPerm = [];
     stop = llGetInventoryNumber(INVENTORY_NOTECARD);
     integer defaultSet = FALSE;
     for (n = 0; n<stop; ++n){//step through the notecards backwards so that default notecard is first in the contents
         string name = llGetInventoryName(INVENTORY_NOTECARD, n);
+        integer permsIndex1 = llSubStringIndex(name,"{");
+        integer permsIndex2 = llSubStringIndex(name,"}");
+        string menuPerms = "";
+        if (permsIndex1 != -1){
+            menuPerms = llToLower(llGetSubString(name, permsIndex1+1, permsIndex2-1));
+            name = llDeleteSubString(name, permsIndex1, permsIndex2);
+        }else{
+            menuPerms = "public";
+        }
         list path = llParseStringKeepNulls(name, [":"], []);
+        menuPerm += [llList2String(path, -1), menuPerms];
         string prefix = llList2String(path, 0);
         if (!defaultSet && ((prefix == setprefix) || (prefix == defaultprefix))){
             defaultPose = llGetInventoryName(INVENTORY_NOTECARD,n);

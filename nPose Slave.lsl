@@ -7,16 +7,13 @@ The nPose scripts are free to be copied, modified, and redistributed, subject to
 
 "Full perms" means having the modify, copy, and transfer permissions enabled in Second Life and/or other virtual world platforms derived from Second Life (such as OpenSim).  If the platform should allow more fine-grained permissions, then "full perms" will mean the most permissive possible set of permissions allowed by the platform.
 */
-
 string currentanim;
 list lastanim;
-//list anims;
 integer facecount;
 integer faceindex;
 list faceanims;
 integer doingFaceAnim = 0;
 integer gotFaceAnim = 0;
-//integer animindex;
 integer animcount;
 integer SYNC = 206;
 integer doSync = 0;
@@ -40,7 +37,7 @@ list AVkeys;
 integer permissions = 0;
 integer layerPose = -218;
 list animsList;
-//list slotsString;
+list faceTimes = [];
 list slots;
 key thisAV;
 integer stop;
@@ -143,7 +140,7 @@ default
         {
             key av;
             list tempList = llParseString2List(str, ["/"], []);
-            if (llGetAgentSize((key)llList2String(tempList, 0))){
+            if (llListFindList(SeatedAvs(), [(key)llList2String(tempList, 0)]) != -1){
                 av = (key)llList2String(tempList, 0);
             }else{
                 integer seatNum = (integer)llList2String(tempList, 0);
@@ -204,8 +201,10 @@ default
             integer stop = llGetListLength(seatsavailable)/8;
             seatAndAv = [];
             slots = [];
+            faceTimes = [];
             gotFaceAnim = 0;
             string buttonStr = "";
+            string faces = "";
             for (seatcount = 1; seatcount <= stop; ++seatcount){
                 integer seatNum = (integer)llGetSubString(llList2String(seatsavailable, (seatcount-1)*8+7), 4,-1);
                 seatAndAv += [seatNum, llList2String(seatsavailable, (seatcount-1)*8+4),llList2String(seatsavailable, (seatcount-1)*8)];
@@ -220,9 +219,32 @@ default
                     buttonStr += llList2String(seatsavailable, (seatcount-1)*8+7)+",";
                 }
                 if (llList2String(seatsavailable, (seatcount-1)*8+3) != ""){
+                    //we need a list consisting of sitter key followed by each face anim and the associated time of each
+                    //put face anims for this slot in a list
+                    list faceanimsTemp = llParseString2List(llList2String(seatsavailable, (seatcount-1)*8+3), ["~"], []); 
+                    facecount = llGetListLength(faceanimsTemp);   
+                    list faces = []; 
+                    integer nFace;
+                    integer hasNewFaceTime = 0;
+                    for (nFace=0; nFace<facecount; ++nFace){
+                        //parse this face anim for anim name and time
+                        list temp = llParseString2List(llList2String(faceanimsTemp, nFace), ["="], []);
+                        //time must be optional so we will make default a zero
+                        //queue on zero to revert to older stuff
+                        if (llList2String(temp, 1)){
+                            //collect the name of the anim and the time
+                            faces += [llList2String(temp, 0), (integer)llList2String(temp, 1)];
+                            hasNewFaceTime = 1;
+                        }else{
+                            faces += [llList2String(temp, 0), -1];
+                        }
+                    }
                     gotFaceAnim=1;
+                    //add sitter key and flag if timer defined followed by a stride 2 list containing face anim name and associated time
+                    faceTimes += [(key)llList2String(seatsavailable, (seatcount-1)*8+4), hasNewFaceTime, facecount] + faces;
                 }
             }
+//            llOwnerSay(llList2CSV(faceTimes));
             llMessageLinked(LINK_SET, seatupdate+1, buttonStr, NULL_KEY);//send list of buttons to the menu
             buttonStr = "";
             //we have our new list of AV's and positions so put them where they belong.  fire off the first seated AV and run time will do the rest.
@@ -289,9 +311,7 @@ default
                 llStartAnimation(currentanim);
             }
         }
-        integer slotind = llListFindList(slots, [thisAV]);
-        faceanims = llParseString2List(llList2String(slots, slotind-1), ["~"], []);     
-        facecount = llGetListLength(faceanims);    
+        //start timer if we have face anims for any slot
         if (gotFaceAnim==1){
             llSetTimerEvent(1.0);
             doingFaceAnim=1;
@@ -315,28 +335,67 @@ default
         integer stop = llGetListLength(slots)/8;
         key av;
         for (n=0; n<stop; ++n){
+            //doing each seat
             av = (key)llList2String(slots, n*8+4);
             faceindex = 0;
-            if (av != ""){
-                faceanims = llParseString2List(llList2String(slots, n*8+3), ["~"], []);     
-                facecount = llGetListLength(faceanims);                
+            //locate our stride in faceTimes list
+            integer keyHasFacial = llListFindList(faceTimes, [av]);
+            //get number of face anims for this seat
+            integer newFaceTimeFlag = llList2Integer(faceTimes, keyHasFacial+1);
+            
+            if (newFaceTimeFlag == 0){
+            //need to know if someone seated in this seat, if not we won't do any facials
+                if (av != ""){
+                    faceanims = llParseString2List(llList2String(slots, n*8+3), ["~"], []);     
+                    facecount = llGetListLength(faceanims);                
+                    if (facecount > 0){
+                        doingFaceAnim=1;
+                        thisAV = llGetPermissionsKey();
+                        llRequestPermissions(av, PERMISSION_TRIGGER_ANIMATION);
+                    }
+                }
+                integer x;
+                for (x=0; x<facecount; ++x){
+                    if (facecount>0){
+                        if (faceindex < facecount){
+                            if (AvLinkNum(av) != -1){
+                                llStartAnimation(llList2String(faceanims, faceindex));
+                            }
+                        }            
+                        faceindex++;
+                    }
+                }
+            }else if (av != ""){
+            //need to know if someone seated in this seat, if not we won't do any facials
+            //do our stuff with defined facial times
+                facecount = llList2Integer(faceTimes, keyHasFacial+2);                
+                //if we have facial anims make sure we have permissions for this av
                 if (facecount > 0){
                     doingFaceAnim=1;
                     thisAV = llGetPermissionsKey();
-                    stop = llGetListLength(slots)/8;
                     llRequestPermissions(av, PERMISSION_TRIGGER_ANIMATION);
                 }
-            }
-            integer x;
-            for (x=0; x<facecount; ++x){
-                if (facecount>0){
+                    integer x;
+                for (x=1; x<=facecount; ++x){
+                    //non looping we check if anim has run long enough
                     if (faceindex < facecount){
-                        if (AvLinkNum(av) != -1){
-                            llStartAnimation(llList2String(faceanims, faceindex));
+                        integer faceStride = keyHasFacial+1+(x*2);
+                        string animName = llList2String(faceTimes, faceStride);
+                        if (llList2Integer(faceTimes, faceStride+1) > 0){
+                            faceTimes = llListReplaceList(faceTimes, [llList2Integer(faceTimes, faceStride+1)-1],
+                             faceStride+1, faceStride+1);
                         }
-                    }            
-                    faceindex++;
+                        if (facecount>0){
+                            if (AvLinkNum(av) != -1 && llList2Integer(faceTimes, faceStride+1) > 0){
+                                llStartAnimation(animName);
+                            }else if (AvLinkNum(av) != -1 && llList2Integer(faceTimes, faceStride+1) == -1){
+                                llStartAnimation(animName);
+                            }
+                            faceindex++;
+                        }
+                    }
                 }
+            
             }
         }
         if (llGetListLength(SeatedAvs())<1){

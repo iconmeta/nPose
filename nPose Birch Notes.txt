@@ -1,4 +1,4 @@
-nPose Birch .007 (Beta4)                  
+nPose Birch RC                  
 
 Bug fixes:
 1. Menus are now sorted alphabetically in two separate sorts.  Notecard defined menu buttons are sorted and placed on the upper portion of the dialog.  Utility buttons are sorted and placed at the bottom of the dialog.
@@ -7,9 +7,12 @@ Bug fixes:
 4.  Multi-User Menu system is now fully functional.  This means that two or more individuals can use the menu system at all levels without interfering with any other individual.
 5.  Support for non-numbered seats as well as numbered seats.
 6.  Fixed a bug so it is not possible to attempt unsitting an Avatar that is not seated.
+7.  Fixed a bug where the slave script did not successfully know if the AV was seated before attempting to impose a layered animation.
 
 New Features:
 1.  Click any adjuster to get a data dump with its' position and rotation.
+2.  Added a line in the header of the menu showing the current path.
+3.  Added the ability to set permissions to each individual sub menu item.  This effectively hides menu items when someone is not authorized.
 
 CHANGELOG
 Ash:

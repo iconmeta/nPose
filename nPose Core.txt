@@ -1,0 +1,48 @@
+nPose Core 0.30.002:                                                  
+NOTE:
+The four base scripts are now leaner than ever and have shown they can successfully handle 27 seated AV's.  These 4 basic scripts will now support both numbered and non-numbered nPose builds.  Non-numbered builds will work as the original nPose except that all (except one) the advantages of numbered seats apply.  Numbered seats allows the user to select their seat before they sit.
+
+    
+Bug Fixes:
+    1. Added check to ensure there is someone seated before initiating llUnSit.
+
+
+Version History:
+0.29.016:
+Bug Fixes:
+    1. Leading and trailing white spaces in notecard lines is now ignored.
+    2. Fixed a bug recently introduced where %AVKEY% was not picking up the correct key.
+
+0.29.011: 
+    1. Cleaned up some of the excess code that was not being utilized.
+    2. Fixed the bug where sit targets were not being properly set.
+
+
+nPose Core 0.29.004(V): 
+New Features:
+    1.  Leaner memory usage.  The core seems to support unlimited AV's.  In testing, 16 AV's were able to sit with virtually no increase in memory usage.
+    2.  Utilizes a seat number for each sit target linked prim. (prim name is the seat number.  i.e. seat 1 name = 1, seat 2 name = 2).
+         The way nPose handles setting sit targets in the on_rez event has changed.  Seat linked prims get sit target set and all other prims are un-set.
+    3.  User can choose the seat to sit just like if there were the pose balls.  Good practice would be to simply use linked prims for this in your build.
+    4.  User can change to any seat rather than swapping to the next and to the next and to the next to get to the intended seat.
+    5.  Broadcasts to all scripts listening within the build when someone changes seats so plugins can track who is where.
+    6.  Implemented optional position adjusting hud to adjust AV position/rotation rather than by editing the adjusters.
+         Use the pos_adjuster_hud to adjust the seated AV directly rather than the adjuster.
+         NOTE: The hud will be attached as a real hud but will be temporary, meaning it will not go into your inventory. Granting permissions is requred.
+    7.  Position reporting when Posdump is clicked or when a position is changed has been modified to put the notecard line data on a separate line.
+        The intent is that this will make editing the notecards a bit easier.  See this example:
+[16:20] nPose 0.028.01x: 
+ANIM|nadu|<-0.299980, 0.499980, 0.799600>|<0.001450, -5.620200, 0.000000>|
+[16:20] nPose 0.028.01x: 
+ANIM|nadu|<-0.299980, -0.500020, 0.799570>|<0.001450, -5.620200, 0.000000>|
+
+0.28.020(V): 
+    1.  Bug fix for LINKMSG to keep backwards compatability.
+    2.  The pos_adjuster_hud is optional.  It does not have to be part of the build if you do not wish to use it.
+    
+0.028.015:
+    1.  Changed when nPose does the %AVKEY% swap to when the AVKEY is needed rather than when notecard is read.
+    2.  Fixed bug where nPose would loose track of seated AV's when the number of seats changed due to changing the pose.
+    3.  Replaced many of the llSay functions with llRegionSayTo functions for far less channel spaming.  Only the intended object/AV receives the messages.
+    
+    

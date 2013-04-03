@@ -1,0 +1,37 @@
+nPose menu .030.003:                                                            
+
+The four base scripts are now leaner than ever and have shown they can successfully handle 27 seated AV's.  These 4 basic scripts will now support both numbered and non-numbered nPose builds.  Non-numbered builds will work exactly as the original nPose except that all (except one) the advantages of numbered seats apply.  Numbered seats allows the user to select their seat before they sit.
+nPose Dialog is considered one of the four base scripts but remains unchanged for many many versions.
+
+    
+Added Features::
+    1.  Added functionality to allow hiding menu items with perms.  This function work on sub menus only (not the root menu).  This function will default to {public} if a permission is not specified.  Optional permissions are {owner}, and {group}.  Usage will be adding either of the optional settings to the end of the notecard name.
+Examples:
+SET:Meditate:Pair{owner}
+SET:Hugs:Sub Hug{group}
+    
+Version History:
+.030.002:       
+    1.  Added the menu path in the header of menu for notecard menus only.
+
+.030.001:
+    1.  Added a check to ensure there is someone seated to unsit before calling the llUnSit function.
+    2.  Fixed small bug where option status is displayed when first going into options menus.
+
+.029.010:
+Bug Fixes:
+    1.  Leading and trailing white spaces in notecard lines is now ignored (no longer an issue).
+    2.  Notecard defined menu buttons are now sorted alphabetically.
+    3.  Utility buttons are also now sorted alphabetically but separately from the notecard defined buttons.
+    
+ New Features:
+    1.  Added support to allow menu options to be set by notecard LINKMSG.
+    
+.029.006: 
+Bug Fixes:
+    1.  Fixed a bug keeping 'Change Seats' from supporting more than 0-9 seats.  Now supports virtually unlimited seats.
+
+0.028.004(V):
+    1.  Replaces "Swap" button with "ChnageSeat".  Allows user to select the destination seat when moving.
+    2.  Tracks who is seated where, and adds user name to seat change buttons if a seat is occupied.
+    3.  RLV option under Admin menu will only show if the RLV plugin is used.

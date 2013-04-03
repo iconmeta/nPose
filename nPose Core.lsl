@@ -514,6 +514,8 @@ default{
                 }else{
                         llResetScript();
                 }
+            }else{
+                llResetScript();
             }
         }
         if (change & CHANGED_REGION){
